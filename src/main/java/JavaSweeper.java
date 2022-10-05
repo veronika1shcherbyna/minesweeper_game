@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import sweeper.Box;
+import sweeper.Coord;
 
 public class JavaSweeper extends JFrame {
     private static final int COLS = 15;
@@ -31,8 +32,11 @@ public class JavaSweeper extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 for (Box box : Box.values()) {
+
+                    Coord coord = new Coord(box.ordinal() * IMAGE_SIZE, 0);
+
                     g.drawImage((Image) box.image,
-                            box.ordinal() * IMAGE_SIZE, 0, this);
+                            coord.x, coord.y, this);
                 }
                 //Anonymous class for creating and adding images
             }
