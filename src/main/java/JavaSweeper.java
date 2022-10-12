@@ -8,12 +8,14 @@ import sweeper.Ranges;
 public class JavaSweeper extends JFrame {
     private static final int COLS = 9;
     private static final int ROWS = 9;
+    private static final int BOMBS = 10;
     private static final int IMAGE_SIZE = 50;
     private JPanel panel;
     private Game game;
 
     private JavaSweeper() {
-        game = new Game(COLS, ROWS);
+        game = new Game(COLS, ROWS, BOMBS);
+        game.start();
         setImages();
         initPanel();
         initFrame();
@@ -21,13 +23,13 @@ public class JavaSweeper extends JFrame {
 
     private void initFrame() {
         //JFrame methods
-        pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //your app will be closed in the IDE when you click on the cross
         setTitle("MineSweeper");
         setLocationRelativeTo(null); //location is in a screen center
         setResizable(false); //you can't change size of an app-window
         setVisible(true);
         setIconImage(getImage("icon"));
+        pack();
     }
 
     private void initPanel() {
