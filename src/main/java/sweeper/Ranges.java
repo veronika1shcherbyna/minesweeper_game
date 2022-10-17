@@ -39,8 +39,8 @@ public class Ranges {
     static List<Coord> getCoordsAround(Coord coord){
         Coord around;
         List<Coord> coords = new ArrayList<>();
-        for (int x = coord.x - 1; x < coord.x + 1; x++) {
-            for (int y = coord.y - 1; y < coord.y + 1; y++) {
+        for (int x = coord.x - 1; x <= coord.x + 1; x++) {
+            for (int y = coord.y - 1; y <= coord.y + 1; y++) {
                 if (inRange(around = new Coord(x,y))) {
                     if (!around.equals(coord)) {
                         coords.add(around);

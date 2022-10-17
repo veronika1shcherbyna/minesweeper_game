@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import sweeper.Box;
 import sweeper.Coord;
 import sweeper.Game;
@@ -25,11 +28,11 @@ public class JavaSweeper extends JFrame {
         //JFrame methods
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //your app will be closed in the IDE when you click on the cross
         setTitle("MineSweeper");
-        setLocationRelativeTo(null); //location is in a screen center
         setResizable(false); //you can't change size of an app-window
         setVisible(true);
-        setIconImage(getImage("icon"));
         pack();
+        setLocationRelativeTo(null); //location is in a screen center
+        setIconImage(getImage("icon"));
     }
 
     private void initPanel() {
@@ -44,6 +47,24 @@ public class JavaSweeper extends JFrame {
                 //Anonymous class for creating and adding images
             }
         };
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int x = e.getX() / IMAGE_SIZE;
+                int y = e.getY() / IMAGE_SIZE;
+                Coord coord = new Coord(x, y);
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    game.pressLeftButton(coord);
+                }
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    game.pressRightButton(coord);
+                }
+                if (e.getButton() == MouseEvent.BUTTON2) {
+                    game.start();
+                }
+                panel.repaint();
+            }
+        });
         panel.setPreferredSize(new Dimension(
                 Ranges.getSize().x * IMAGE_SIZE,
                 Ranges.getSize().y * IMAGE_SIZE)); //setting size of an app-window
